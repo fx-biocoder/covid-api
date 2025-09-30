@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        - RAPID_API_KEY=${RAPID_API_KEY}
+    ports:
+      - "8080:80"
+    restart: unless-stopped
