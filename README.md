@@ -1,4 +1,4 @@
-# COVID-19 Statistics Dashboard
+# COVID-19 Statistics Dashboard (Work In Progress)
 
 A real-time dashboard that displays COVID-19 statistics using the COVID-19 Statistics API from RapidAPI.
 
