@@ -8,17 +8,15 @@ WORKDIR /usr/src/app
 ARG RAPID_API_KEY
 ENV RAPID_API_KEY=$RAPID_API_KEY
 
-# Copy package files
-COPY package*.json ./
-
 # Install dependencies
+COPY package*.json ./
 RUN npm install
 
 # Copy source files (excluding .env files)
 COPY . .
 
 # Generate config and bundle
-RUN npm run build
+RUN npm run build:docker
 
 # Use nginx to serve static files
 FROM nginx:alpine

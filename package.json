@@ -1,10 +1,11 @@
 {
   "scripts": {
     "clean": "rimraf dist",
-    "prebuild": "npm run clean && node scripts/generate-config.js",
-    "build": "node scripts/build.js",
+    "prebuild": "npm run clean && ts-node scripts/generate-config.ts",
+    "build": "ts-node scripts/build.ts",
+    "build:docker": "npm run clean && node scripts/generate-config.js && node scripts/build.js",
     "start": "http-server . --cors -c-1",
-    "dev": "node scripts/build.js --watch"
+    "dev": "ts-node-dev --respawn scripts/build.ts"
   },
   "dependencies": {
     "@types/dotenv": "^8.2.3",
@@ -14,6 +15,8 @@
   "devDependencies": {
     "@types/node": "^24.5.2",
     "esbuild": "^0.25.10",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0"
   }
 }

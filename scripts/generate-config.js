@@ -1,17 +1,27 @@
 const fs = require('fs');
 const path = require('path');
+const dotenv = require('dotenv');
 
-// Read the .env file
-require('dotenv').config();
+function generateConfig() {
+  // Load environment variables
+  dotenv.config();
 
-// Create the config content
-const config = `// This file is auto-generated. Do not edit it manually.
-export const config = {
-    rapidApiKey: '${process.env.RAPID_API_KEY || ''}'
-} as const;
-`;
+  const config = {
+    rapidApiKey: process.env.RAPID_API_KEY || ''
+  };
 
-// Write to config.ts
-fs.writeFileSync(path.join(__dirname, '..', 'config.ts'), config);
+  // Create config directory if it doesn't exist
+  const configDir = path.join(__dirname, '..', 'src', 'config');
+  if (!fs.existsSync(configDir)) {
+    fs.mkdirSync(configDir, { recursive: true });
+  }
 
-console.log('Config file generated successfully!');
+  // Write config file
+  const configPath = path.join(configDir, 'index.ts');
+  const configContent = `export const config = ${JSON.stringify(config, null, 2)} as const;`;
+  
+  fs.writeFileSync(configPath, configContent);
+  console.log('Config file generated successfully');
+}
+
+generateConfig();

@@ -1,7 +1,7 @@
 const esbuild = require('esbuild');
 
 esbuild.build({
-  entryPoints: ['app.ts'],
+  entryPoints: ['src/app.ts'],
   bundle: true,
   outfile: 'dist/bundle.js',
   format: 'esm',
